@@ -30,12 +30,11 @@ NonGov   <- read.csv("./PrimeDeRisque/ObligationsEnt.csv", sep = ";", skip = 4)
 Defaults <- read.xlsx("./PrimeDeRisque/Defaults_OFS.xlsx", sheetName = "T6.2.3.1", as.data.frame = TRUE)
 
 # Beginning of default procedures (Ouverture des procédures de faillite)
-# I calculate the number of default procedures as a share of active firms in 2017
+# I calculate the growth rate of default procedures as a share of active firms in 2017
 # https://www.bfs.admin.ch/bfs/de/home/statistiken/industrie-dienstleistungen/unternehmen-beschaeftigte/unternehmensdemografie/bestand-aktiver.html
-numberFirms2017 <- 555626
 myDate      <- as.Date(paste(as.numeric(as.matrix((Defaults[1,2:length(Defaults[1,])]))), "-01-01", sep = ""))
 myDefaults  <- as.numeric(as.matrix((Defaults[2,2:length(Defaults[2,])])))
-Faillite <- xts(myDefaults, order.by = myDate)/numberFirms2017*100
+Faillite <- ts_diff(xts(myDefaults, order.by = myDate)/1000)
 
 # Create date series
 nobs    <- dim(Gov)[1]
@@ -97,8 +96,8 @@ myLines <- c(as.numeric(as.Date("2008-09-15")), as.numeric(as.Date("2015-01-15")
 
 p <- ts_ggplot(
   `Confédération`                     = ts_span(Gov1, startDate),
-  `Entrerpises (notation AA-AAA)`     = ts_span(AA1, startDate),
-  `Entrerpises (notation BBB-AAA)`    = ts_span(BBB1, startDate),
+  `Entreprises (notation AA-AAA)`     = ts_span(AA1, startDate),
+  `Entreprises (notation BBB-AAA)`    = ts_span(BBB1, startDate),
   
   title = "Rendements des obligations à 1 ans (en %)"
 )
@@ -108,19 +107,15 @@ p <- p + theme_minimal() + ylab("")+xlab("")+
   theme(legend.position="bottom",legend.margin=margin(0,0,0,0),legend.box.margin=margin(-20,-5,0,-5))+ggplot2::guides(col=guide_legend(nrow=2,byrow=TRUE))+ggplot2::theme(legend.title = element_blank())+
   theme(axis.line = element_line(colour = "black", size = 0.1))+ theme(panel.background = element_blank())+
   theme(panel.border = element_rect(linetype = "solid", colour = "black", fill = NA))+theme(text = element_text(family = "Palatino"))+
-  theme(panel.grid.major = element_line(colour = "black",size=0.1,linetype="dotted"), panel.grid.minor = element_blank()) +
-  geom_vline(xintercept=myLines , colour="blue", size = 1, alpha = 0.5) 
-  p <- p+  geom_text(x =myLines[1], y = 0, label="Faillite Lehman", colour="blue", angle=90, vjust = -1)
-  p <- p+  geom_text(x =myLines[2], y = 2, label="Fin du taux plancher", colour="blue", angle=90, vjust = -1)
-  p <- p+  geom_text(x =myLines[3], y = 2, label="Crise Corona", colour="blue", angle=90, vjust = -1)
-  p
+  theme(panel.grid.major = element_line(colour = "black",size=0.1,linetype="dotted"), panel.grid.minor = element_blank()) 
+p
 ggsave(filename = "./PrimeDeRisque/Obligations.png", width = 5, height = 4)
 
 p <- ts_ggplot(
-  `Entrerpises (notation AA-AAA)`  = ts_span(RPAA1, startDate),
-  `Entrerpises (notation BBB-AAA)` = ts_span(RPBBB1, startDate),
+  `Entreprises (notation AA-AAA)`  = ts_span(RPAA1, startDate),
+  `Entreprises (notation BBB-AAA)` = ts_span(RPBBB1, startDate),
   
-  title = "Primes de risque à 1 ans (en pp)"
+  title = "Prime de risque à 1 ans (en pp)"
 )
 p <- p + theme_minimal() + ylab("")+xlab("")+
   ggplot2::geom_line(aes(),size=1)+ggplot2::scale_color_brewer(palette = "Dark2")+
@@ -137,9 +132,9 @@ p
 ggsave(filename = "./PrimeDeRisque/PrimesDeRisque.png", width = 5, height = 4)
 
 p <- ts_ggplot(
-  `Primes de risques (notation BBB-AAA, en pp)`           = ts_span(RPBBB1, startDate),
-  `Ouverture proc. de faillite (en % des ent. en 2017)`  = ts_span(Faillite, startDate),
-  title = "Relation avec les procédures de faillite"
+  `Prime de risque (notation BBB-AAA, en pp)`           = ts_span(RPBBB1, startDate),
+  `Ouverture proc. de faillite (variation, en 1000 ouvertures par an)`  = ts_span(Faillite, startDate),
+  title = "Relation avec des procédures de faillite"
 )
 p <- p + theme_minimal() + ylab("")+xlab("")+
   ggplot2::geom_line(aes(),size=1)+ggplot2::scale_color_brewer(palette = "Dark2")+
@@ -147,11 +142,7 @@ p <- p + theme_minimal() + ylab("")+xlab("")+
   theme(legend.position="bottom",legend.margin=margin(0,0,0,0),legend.box.margin=margin(-20,-5,0,-5))+ggplot2::guides(col=guide_legend(nrow=2,byrow=TRUE))+ggplot2::theme(legend.title = element_blank())+
   theme(axis.line = element_line(colour = "black", size = 0.1))+ theme(panel.background = element_blank())+
   theme(panel.border = element_rect(linetype = "solid", colour = "black", fill = NA))+theme(text = element_text(family = "Palatino"))+
-  theme(panel.grid.major = element_line(colour = "black",size=0.1,linetype="dotted"), panel.grid.minor = element_blank()) +
-  geom_vline(xintercept=myLines , colour="blue", size = 1, alpha = 0.5) 
-p <- p+  geom_text(x =myLines[1], y = 1.5, label="Faillite Lehman", colour="blue", angle=90, vjust = -1)
-p <- p+  geom_text(x =myLines[2], y = 1.5, label="Fin du taux plancher", colour="blue", angle=90, vjust = -1)
-p <- p+  geom_text(x =myLines[3], y = 1.5, label="Crise Corona", colour="blue", angle=90, vjust = -1)
+  theme(panel.grid.major = element_line(colour = "black",size=0.1,linetype="dotted"), panel.grid.minor = element_blank())
 p
 ggsave(filename = "./PrimeDeRisque/ProcFaillitePrime.png", width = 5, height = 4)
 
