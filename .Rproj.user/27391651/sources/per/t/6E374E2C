@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586257506094.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4120762599",
+    "id" : "6E374E2C",
+    "lastKnownWriteTime" : 1586415431,
+    "last_content_update" : 1586415431233,
+    "path" : "C:/Users/daenu/switchdrive/Public/Videos/GitHub/S01E02_BarometreMondial.R",
+    "project_path" : "S01E02_BarometreMondial.R",
+    "properties" : {
+        "cursorPosition" : "125,76",
+        "scrollLine" : "104"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
