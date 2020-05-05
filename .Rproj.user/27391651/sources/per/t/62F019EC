@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588679650904.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2819640653",
+    "id" : "62F019EC",
+    "lastKnownWriteTime" : 1587036623,
+    "last_content_update" : 1587036623,
+    "path" : "C:/Users/daenu/switchdrive/Research/TrendInflation/empiricsCostly/RomerizeBLSData.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "102,1",
+        "scrollLine" : "78"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

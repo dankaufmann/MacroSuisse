@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588678944573.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3917321922",
+    "id" : "21E50ED4",
+    "lastKnownWriteTime" : 1588681331,
+    "last_content_update" : 1588681332014,
+    "path" : "C:/Users/daenu/switchdrive/Public/Videos/GitHub/S01E04_Prix.R",
+    "project_path" : "S01E04_Prix.R",
+    "properties" : {
+        "cursorPosition" : "54,26",
+        "scrollLine" : "51"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

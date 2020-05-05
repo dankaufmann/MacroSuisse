@@ -19,4 +19,6 @@ Episodes Season 1
 S01E01: Prime de risque: "La courbe de fièvre de l'économie Suisse"
 S01E02: Baromètre conjoncturel mondial: "Les saints de glace jettent un froid sur la Suisse"
 S01E03: Le taux dirécteur: "Les taux d'intérêts: Est-ce qu'ils les instructions du dirécteur?"
+S01E04: Les prix: "Les prix baissent en Suisse – C’est top n’est-ce pas?"
+
 
